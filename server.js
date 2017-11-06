@@ -130,6 +130,25 @@ function camera_setting() {
     }, 500);
 };
 
+//직접 찰영 
+function camera_reset() {
+    timeInMs = moment().format('YYYYMMDDHHnnss');
+    photo_path = __dirname + '/images/' + timeInMs + '123.jpg';
+    cmd_photo = 'raspistill -vf -t 1 -w 600 -h 420 -o' + photo_path;
+    setTimeout(() => { camera_reshooting(); }, 500);
+}
+//직접 촬영 
+function camera_reshooting() {
+    exec_photo(cmd_photo, function(err, stdout, stderr) {
+        if (err) {
+            console.log('child process exited with shooting_photo error stack', err.stack);
+            return;
+        }
+        console.log('photo recaptured with filename : ' + timeInMs);
+        camera_sending();
+    })
+}
+
 // 설정된 값으로 카메라 촬영
 function camera_shooting() {
     exec_photo(cmd_photo, function(err, stdout, stderr) {
