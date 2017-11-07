@@ -65,6 +65,12 @@ connection.query(stmt, function(err, result) {
     module_start();
 });
 
+/////////////////local db에 데이터 쌓기 및 사진 이미지 경로 저장 모듈 불러오기
+var valuecontrollers = require('./controllers/value');
+var carmeracontrollers = require('./controllers/camera');
+
+
+
 //통신 후 db 재설정 및 카메라 모듈 재시작
 function rederection() {
     connection = mysql_dbc.init();
